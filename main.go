@@ -4,13 +4,11 @@ import (
 	"encoding/binary"
 	"fmt"
 	"github.com/coalalib/coalago"
-	"github.com/kklash/genetic"
 	log "github.com/ndmsystems/golog"
 	"math"
 	"math/rand"
 	"os"
 	"runtime/pprof"
-	"strconv"
 	"time"
 )
 
@@ -28,8 +26,8 @@ func main() {
 	f, _ := os.Create(fmt.Sprintf("pprof_%s", mode))
 	//addr := "165.22.120.237"
 	addr := "147.182.133.37"
-	//port := 5683
-	port := 5555
+	port := 5683
+	//port := 5555
 	uri := "/tests/large"
 	switch mode {
 	case "server":
@@ -73,9 +71,9 @@ func main() {
 			os.WriteFile("testfileDone", resp.Body, 7777)
 		}
 	case "poster":
-		coalago.P, _ = strconv.ParseFloat(os.Args[2], 64)
+		/*coalago.P, _ = strconv.ParseFloat(os.Args[2], 64)
 		coalago.I, _ = strconv.ParseFloat(os.Args[3], 64)
-		coalago.D, _ = strconv.ParseFloat(os.Args[4], 64)
+		coalago.D, _ = strconv.ParseFloat(os.Args[4], 64)*/
 		cl := coalago.NewClient()
 		var resp *coalago.Response
 		var err error
@@ -105,7 +103,7 @@ func main() {
 		time.Sleep(time.Second * 20)
 		pprof.StopCPUProfile()
 		return
-	case "genetic_post":
+		/*case "genetic_post":
 		cl := coalago.NewClient()
 		fcontent, _ := os.ReadFile("testfile20mb")
 		genAlgo := genetic.NewPopulation(
@@ -160,6 +158,7 @@ func main() {
 		coalago.I = ByteToFloat64(bestSolution[16:24])
 		coalago.D = ByteToFloat64(bestSolution[24:])
 		println(fmt.Sprintf("WS: %d, P: %f, I: %f, D: %f, Best : %d", coalago.DEFAULT_WINDOW_SIZE, coalago.P, coalago.I, coalago.D, bestFitness))
+		*/
 	}
 
 }
